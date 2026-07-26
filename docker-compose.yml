@@ -1,0 +1,38 @@
+# docker-compose.yml — Root orchestration for terra-api-home ecosystem
+#
+# This file orchestrates ALL services in the terra-api-home ecosystem:
+# - Backend API (terra-api)
+# - Frontend (terra-api-fe)
+# - Jenkins CI/CD (terra-jenkins)
+#
+# Each child folder has its own docker-compose file:
+# - terra-api/docker-compose.dev.yml — Backend + Postgres + Redis
+# - terra-jenkins/docker-compose.jenkins.yml — Jenkins
+#
+# To start all services:
+#   docker-compose up -d
+#
+# To stop all services:
+#   docker-compose down
+#
+# Individual services can also be started separately:
+#   cd terra-api && docker-compose -f docker-compose.dev.yml up
+#   cd terra-jenkins && docker-compose -f docker-compose.jenkins.yml up
+
+version: '3.8'
+
+services:
+  # Backend (Spring Boot) + Postgres + Redis
+  # See: terra-api/docker-compose.dev.yml
+  # Ports: 8081 (API), 8082 (Actuator)
+  # Managed by: docker-compose in terra-api folder
+
+  # Frontend (React)
+  # See: terra-api-fe/Dockerfile (once npm install completes)
+  # Ports: 3000
+  # Status: Commented out until terra-api-fe is fully built
+
+  # Jenkins CI/CD
+  # See: terra-jenkins/docker-compose.jenkins.yml
+  # Ports: 8090 (Web UI), 50000 (Agent)
+  # Managed by: docker-compose in terra-jenkins folder

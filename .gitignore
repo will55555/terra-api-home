@@ -1,0 +1,22 @@
+# Parent-level .gitignore for terra-api ecosystem
+# This folder orchestrates multiple repos; individual repos have their own .gitignore files.
+
+# Docker files belong at parent level ONLY (via docker-compose.yml, docker.env)
+# If individual repos accidentally get docker-compose files, they should be rejected:
+terra-api/docker-compose*.yml
+terra-api-fe/docker-compose*.yml
+terra-jenkins/docker-compose*.yml
+docker*.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local env overrides (if any)
+.env.local
