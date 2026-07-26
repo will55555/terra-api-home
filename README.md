@@ -62,11 +62,13 @@ npm start
 
 ## Important Notes
 
-**Do NOT create `docker-compose.yml` files in individual repos** (`terra-api/`, `terra-api-fe/`, etc.). The parent-level `docker-compose.yml` is the single source of truth for local development.
+**Local-dev orchestration is composed at the root via `include:`**, not duplicated. The
+root `docker-compose.yml` pulls in each service's own compose file (`terra-api/docker-compose.yml`,
+`terra-api/docker-compose.dev.yml`, `terra-jenkins/docker-compose.jenkins.yml`) — it does not
+redefine services itself.
 
-- **Individual repos must NOT have docker-compose files** — prevents drift and confusion
-- **Production deployments use separate files**: `docker-compose.prod.yml` and `docker-compose.staging.yml` in `terra-api/` (EC2-specific, not for local dev)
-- **Jenkins has its own compose**: `terra-jenkins/docker-compose.jenkins.yml` (isolated infrastructure)
+- **Individual repos DO keep their own compose files** — that's required, not a drift risk: `terra-api/docker-compose.prod.yml` / `docker-compose.staging.yml` are EC2-specific deploys that have nothing to do with local dev, and `terra-api/docker-compose.dev.yml` / `terra-jenkins/docker-compose.jenkins.yml` are exactly what this root file includes.
+- **Only `docker.env` (parent-level, gitignored) and this root `docker-compose.yml` are orchestration-specific to this repo** — everything else lives with its own service.
 
 ## Architecture
 
@@ -97,7 +99,7 @@ Both repos sync to GitHub + Bitbucket mirror:
 git push all --all  # Pushes to both remotes simultaneously
 ```
 
-See memory at `~/.claude/projects/c--Users-solan-OneDrive-Desktop-SDE-terra-api/memory/` for multi-remote workflow.
+See memory at `~/.claude/projects/c--Users-test-Desktop-Programing-terra-api-home/memory/` for multi-remote workflow (path is machine-specific — verify on any new machine).
 
 ## Development Workflow
 

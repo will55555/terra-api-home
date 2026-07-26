@@ -10,29 +10,16 @@
 # - terra-jenkins/docker-compose.jenkins.yml — Jenkins
 #
 # To start all services:
-#   docker-compose up -d
+#   docker compose --env-file docker.env up -d --build
 #
 # To stop all services:
-#   docker-compose down
+#   docker compose --env-file docker.env down
 #
 # Individual services can also be started separately:
 #   cd terra-api && docker-compose -f docker-compose.dev.yml up
 #   cd terra-jenkins && docker-compose -f docker-compose.jenkins.yml up
 
-version: '3.8'
-
-services:
-  # Backend (Spring Boot) + Postgres + Redis
-  # See: terra-api/docker-compose.dev.yml
-  # Ports: 8081 (API), 8082 (Actuator)
-  # Managed by: docker-compose in terra-api folder
-
-  # Frontend (React)
-  # See: terra-api-fe/Dockerfile (once npm install completes)
-  # Ports: 3000
-  # Status: Commented out until terra-api-fe is fully built
-
-  # Jenkins CI/CD
-  # See: terra-jenkins/docker-compose.jenkins.yml
-  # Ports: 8090 (Web UI), 50000 (Agent)
-  # Managed by: docker-compose in terra-jenkins folder
+include:
+  - path: terra-api/docker-compose.yml       # infra: Postgres + Redis
+  - path: terra-api/docker-compose.dev.yml   # terra-api-be (+ optional frontend, commented until npm install)
+  - path: terra-jenkins/docker-compose.jenkins.yml

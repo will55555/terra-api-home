@@ -17,9 +17,10 @@ git clone https://github.com/will55555/terra-api.git
 git clone https://github.com/will55555/terra-api-fe.git
 git clone https://github.com/will55555/terra-jenkins.git
 
-# Checkout active branches
-cd terra-api && git checkout phase-6-cicd && cd ..
-cd terra-api-fe && git checkout main && cd ..
+# Checkout the active branch for each repo — check HUB_STATE.md (claude-skills/skills/ai-control/)
+# for the current one; branch names here go stale fast, don't hardcode them.
+cd terra-api && git checkout <active-branch> && cd ..
+cd terra-api-fe && git checkout <active-branch> && cd ..
 ```
 
 ## On Every Machine (or after pulling updates)
@@ -45,9 +46,13 @@ docker-compose up -d
 - Pull updates from this repo on every machine to stay in sync
 
 **DON'T:**
-- Create docker-compose files in child repos (they'll be rejected by .gitignore)
+- Add *new local-dev* compose files outside this root file's `include:` list without updating it here too
 - Commit app code to this repo
 - Manually edit docker-compose.yml on different machines (pull from git instead)
+
+Note: child repos DO legitimately keep their own compose files (`terra-api/docker-compose.dev.yml`,
+`terra-api/docker-compose.prod.yml`/`.staging.yml`, `terra-jenkins/docker-compose.jenkins.yml`) —
+the root `.gitignore` here has no effect on them anyway, since each is its own git repo.
 
 ## Troubleshooting
 
