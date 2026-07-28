@@ -4,6 +4,13 @@
 # Local-only orchestration secrets (never committed)
 docker.env
 
+# Child repos — independent siblings, cloned separately per SETUP.md.
+# NOT submodules: tracking them here commits bare gitlinks that clone as
+# empty directories. See SETUP.md for the clone steps.
+terra-api/
+terra-api-fe/
+terra-jenkins/
+
 # IDE
 .idea/
 .vscode/
