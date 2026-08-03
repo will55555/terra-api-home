@@ -3,6 +3,7 @@
 
 # Local-only orchestration secrets (never committed)
 docker.env
+*.pem
 
 # Child repos — independent siblings, cloned separately per SETUP.md.
 # NOT submodules: tracking them here commits bare gitlinks that clone as
