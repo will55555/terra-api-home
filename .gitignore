@@ -10,6 +10,7 @@ docker.env
 terra-api/
 terra-api-fe/
 terra-jenkins/
+terra-hq-site/
 
 # IDE
 .idea/
