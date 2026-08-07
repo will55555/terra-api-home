@@ -12,6 +12,7 @@ terra-api/
 terra-api-fe/
 terra-jenkins/
 terra-hq-site/
+restaurant-order-management-system/
 
 # IDE
 .idea/
